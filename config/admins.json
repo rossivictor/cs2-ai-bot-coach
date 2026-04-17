@@ -1,0 +1,8 @@
+{
+    "can1sh": {
+      "identity": "76561198100290385",
+      "immunity": 100,
+      "flags": ["@css/root"],
+      "groups": ["#css/admin"]
+    }
+  }

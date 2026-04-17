@@ -1,0 +1,24 @@
+# ─── Environment ─────────────────────────────────────────────────────────────
+.env
+
+# ─── Node.js ──────────────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+*.log
+
+# ─── Debug / runtime outputs ─────────────────────────────────────────────────
+debug_payloads.json
+last_payload.json
+
+# ─── .NET / C# ────────────────────────────────────────────────────────────────
+services/cs2-plugin/src/bin/
+services/cs2-plugin/src/obj/
+services/cs2-plugin/obj/
+services/cs2-plugin/bin/
+*.user
+*.suo
+.vs/
+
+# ─── OS ───────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db

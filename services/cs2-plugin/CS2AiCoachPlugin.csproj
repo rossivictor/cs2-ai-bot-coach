@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- .NET 8.0 obrigatório para compatibilidade com CounterStrikeSharp -->
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>CS2AiCoachPlugin</AssemblyName>
+    <RootNamespace>CS2AiCoachPlugin</RootNamespace>
+    <Version>1.0.0</Version>
+
+    <!--
+      Não copie dependências transitivas do CSS para a pasta de output —
+      o servidor já carrega o CounterStrikeSharp.API em runtime.
+    -->
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+
+    <!--
+      Direciona o output para src/bin/$(Configuration)/$(TargetFramework)/
+      para que build.ps1 possa referenciar src/bin/Release/net8.0/ diretamente.
+    -->
+    <OutputPath>src/bin/$(Configuration)/</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--
+      CounterStrikeSharp.API é publicado no NuGet.org.
+      Use "dotnet restore" para baixar a versão mais recente.
+      Se precisar de uma versão específica, substitua * pela versão desejada.
+    -->
+    <PackageReference Include="CounterStrikeSharp.API" Version="*" />
+  </ItemGroup>
+
+</Project>

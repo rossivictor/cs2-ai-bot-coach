@@ -1,0 +1,49 @@
+services:
+  cs2:
+    image: xbird/cs2-matchzy
+    container_name: cs2-ai-coach-server
+    restart: unless-stopped
+    ports:
+      - "27015:27015/tcp"
+      - "27015:27015/udp"
+      - "27020:27020/udp"
+      - "27016:27016/tcp"
+    environment:
+      SRCDS_TOKEN: "${SRCDS_TOKEN}"
+      CS2_SERVERNAME: "AI Coach Server"
+      CS2_GAMETYPE: 0
+      CS2_GAMEMODE: 1
+      CS2_STARTMAP: "de_dust2"
+      CS2_MAXPLAYERS: 10
+      CS2_BOT_DIFFICULTY: 3
+      CS2_BOT_QUOTA: 9
+      CS2_BOT_QUOTA_MODE: "fill"
+      CS2_LAN: 1
+      CS2_ADDITIONAL_ARGS: "+sv_lan 1 +sv_password ''"
+    volumes:
+      - cs2-data:/home/steam/cs2-dedicated/
+    networks:
+      - coach-network
+
+  coach:
+    build:
+      context: services/coach
+      dockerfile: Dockerfile
+    container_name: cs2-ai-coach-node
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      ANTHROPIC_API_KEY: "${ANTHROPIC_API_KEY}"
+      CS2_CONTAINER_URL: "http://cs2:27016"
+    networks:
+      - coach-network
+    depends_on:
+      - cs2
+
+networks:
+  coach-network:
+    driver: bridge
+
+volumes:
+  cs2-data:
